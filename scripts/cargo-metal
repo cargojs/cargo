@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var packagejson = require(__dirname + '/../package.json');
+var program = require('commander');
+var _ = require('lodash');
+var cargo = require('..');
+
+program
+    .version(packagejson.version)
+    .description('Manage your infrastructure\'s metal, provision based on metal configuration')
+    .arguments('<action> [metal...]')
+    .action(function (action, metal) {
+        if (!_.isFunction(cargo.metal[action])) {
+            cargo.log('throw', 'The given action does not exist');
+        }
+
+        cargo.metal[action](metal, function () {
+            cargo.log('Finished', action, 'on', metal.join(', '));
+        })
+    })
+    .parse(process.argv);
+
+if (!process.argv.slice(3).length) {
+    program.help();
+}
