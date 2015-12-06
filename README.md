@@ -5,6 +5,65 @@ Git flow your development and deployment projects
 Cargo is a collection of commands used to manage an infrastructure using
 a git-flow style workflow.
 
+## Installation
+
+Cargo can be installed using the following commands
+
+````
+git clone https://github.com/cargojs/cargo.git ~/.cargo && \
+cd ~/.cargo && \
+npm install && \
+cd
+````
+
+## Project Configuration
+
+To use cargo you will need to create a project folder and put a file
+'cargo.config' inside. The config file might look like the following
+taken from `examples/grav/cargo.config`
+
+````yaml
+name: grav
+repositories:
+    grav:
+        uri: 'https://github.com/getgrav/grav.git'
+        setup: './bin/grav install'
+services:
+    www:
+        image: 'docker/php:apache'
+        maps:
+            - 'grav:/var/www/html'
+metal:
+    development:
+        driver: virtualbox
+
+````
+
+You will need to set up a machine to run your service containers (currently
+boot2docker machine on virtualbox is supported) to do this run the following:
+
+````
+cargo metal provision development
+````
+
+This will create a docker-machine instance called grav.development
+([name].[metal]). Now you have a machine you can initialise your repositories
+and development environment using:
+
+````
+cargo init -
+````
+
+This will pull all the repositories listed in your configuration and run
+any setup commands given (these are run from the repo directory). You can then
+build and then start any services on your development metal (if it is running).
+
+````
+cargo service provision development -
+````
+
+## Commands
+
 ### cargo
 
 ````
@@ -67,6 +126,36 @@ a git-flow style workflow.
   Usage: cargo-setup [options] <repo...>
 
   Runs setup tasks for all or particular repositories (paralell operation)
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+````
+
+### cargo metal
+
+````
+
+  Usage: cargo-metal [options] <action> [metal...]
+
+  Manage your infrastructure's metal, provision based on metal configuration (no wildcarding)
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+````
+
+### cargo path
+
+````
+
+  Usage: cargo-path [options]
+
+  Show the cargo installation path from this project
 
   Options:
 

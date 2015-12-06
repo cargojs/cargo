@@ -1,5 +1,7 @@
 require('shelljs/global');
 var fs = require('fs');
+var shell = require('shelljs');
+
 /**
  * Git flow your entire development workflow
  * @class Cargo
@@ -10,20 +12,14 @@ var Cargo = function () {
     this.config = require('./cargo-config')(this);
     this.git = require('./cargo-git')(this);
     this.setup = require('./cargo-setup')(this);
+    this.metal = require('./cargo-metal')(this);
+    this.service = require('./cargo-service')(this);
 
+    // Create the local cargo folder if we have a config path
+    if (this.config.get('path')) {
+        shell.mkdir('-p', this.config.get('path') + '/.cargo');
+    }
 };
-
-/**
- * Storage for cargo setup
- * @type {Object}
- */
-Cargo.prototype.setup = {};
-
-/**
- * Storage for cargo config from cargo.config file
- * @type {Object}
- */
-Cargo.prototype.config = {};
 
 /**
  * Check that all the requirements for starting docker are met
@@ -31,9 +27,7 @@ Cargo.prototype.config = {};
  */
 Cargo.prototype.checkRequirements = function () {
     var scope = this;
-    exec('docker-machine ls', {silent: true}, function (err, output) {
-        scope.setup.metals = /^(?!NAME)([0-9a-zA-Z\-\.]+)/gm;
-    });
+
     if (!which('git')) {
         this.log('throw', 'Sorry, this script requires git');
     }

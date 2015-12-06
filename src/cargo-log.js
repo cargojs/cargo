@@ -31,6 +31,9 @@ CargoLog.prototype.log = function () {
     args.unshift(colors[color]('[cargo]'));
     // if (this.verbose)
     console.log.apply(this, args);
+    if (type && type == 'throw') {
+        process.exit(1);
+    }
 };
 
 /**

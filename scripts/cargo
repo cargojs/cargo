@@ -12,11 +12,12 @@ program
     .version(packagejson.version)
     .description('Git flow your development and deployment projects')
     .command('init', 'Initialise the nearest cargo configuration')
-    .command('install', 'Install the current cargo config')
-    .command('update', 'Update the current cargo from config')
     .command('clone <repo...>', 'Clone and pull any repositories including development and master branches')
     .command('setup <repo...>', 'Run the setup scripts for each repository')
+    .command('metal <action> <metal...>', 'Manage your infrastructure\'s metal, provision based on metal configuration')
+    .command('service <action> <service...>', 'Manage your infrastructure\'s services')
     .command('config', 'Show the config information that would be used for any commands')
+    .command('path', 'Show the cargo installation path')
     .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
