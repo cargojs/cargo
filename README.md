@@ -74,3 +74,18 @@ a git-flow style workflow.
     -V, --version  output the version number
 
 ````
+
+### cargo metal
+
+````
+
+  Usage: cargo-metal [options] <action> [metal...]
+
+  Manage your infrastructure's metal, provision based on metal configuration
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+````
