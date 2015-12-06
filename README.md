@@ -22,7 +22,7 @@ To use cargo you will need to create a project folder and put a file
 'cargo.config' inside. The config file might look like the following
 taken from `examples/grav/cargo.config`
 
-````
+````yaml
 name: grav
 repositories:
     grav:
