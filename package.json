@@ -1,0 +1,39 @@
+{
+  "name": "cargo",
+  "version": "1.0.0-dev",
+  "description": "Git flow your development and deployment projects",
+  "scripts": {
+
+  },
+  "xo": {
+    "space": 4
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cargojs/cargo.git"
+  },
+  "keywords": [
+    "automate",
+    "development",
+    "git",
+    "flow"
+  ],
+  "author": "Lawrence <lawrence@thejs.ninja>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/cargojs/cargo/issues"
+  },
+  "homepage": "https://github.com/cargojs/cargo#readme",
+  "dependencies": {
+    "async": "^1.5.0",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "lodash": "^3.10.1",
+    "shelljs": "^0.5.3",
+    "unzip": "^0.1.11",
+    "yamljs": "^0.2.4"
+  },
+  "bin": {
+    "cargo": "scripts/cargo"
+  }
+}

@@ -1,0 +1,8 @@
+# Node specific
+node_modules/
+npm-debug.log
+bin/
+
+# Cargo specific
+.cargo/
+examples/*/repos

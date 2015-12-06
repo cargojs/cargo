@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var packagejson = require(__dirname + '/../package.json');
+var program = require('commander');
+var _ = require('lodash');
+var cargo = require('..');
+
+var shell = require('shelljs');
+
+program
+    .version(packagejson.version)
+    .description('Will clone all or particular repositories (paralell operation)')
+    .arguments('<repo...>', 'The repo that you want to clone')
+    .action(function (repos) {
+        cargo.git.clone(repos, function () {
+            cargo.log('Finished cloning repositories:', repos.join(', '));
+        });
+    })
+    .parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+    program.help();
+}
