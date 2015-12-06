@@ -13,6 +13,7 @@ var Cargo = function () {
     this.git = require('./cargo-git')(this);
     this.setup = require('./cargo-setup')(this);
     this.metal = require('./cargo-metal')(this);
+    this.service = require('./cargo-service')(this);
 
     // Create the local cargo folder if we have a config path
     if (this.config.get('path')) {
