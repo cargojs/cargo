@@ -5,6 +5,49 @@ Git flow your development and deployment projects
 Cargo is a collection of commands used to manage an infrastructure using
 a git-flow style workflow.
 
+## Configuration
+
+To use cargo you will need to create a project folder and put a file
+'cargo.config' inside. The config file might look like the following
+taken from `examples/grav/cargo.config`
+
+````
+name: grav
+repositories:
+    grav:
+        uri: 'https://github.com/getgrav/grav.git'
+        setup: './bin/grav install'
+services:
+    www:
+        image: 'docker/php:apache'
+        maps:
+            - 'grav:/var/www/html'
+metal:
+    development:
+        driver: virtualbox
+
+````
+
+You will need to set up a machine to run your service containers (currently
+boot2docker machine on virtualbox is supported) to do this run the following:
+
+````
+cargo metal provision development
+````
+
+This will create a docker-machine instance called grav.development
+([name].[metal]). Now you have a machine you can initialise your repositories
+using:
+
+````
+cargo init -
+````
+
+This will pull all the repositories listed in your configuration and run
+any setup commands given (these are run from the repo directory)
+
+## Commands
+
 ### cargo
 
 ````
