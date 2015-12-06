@@ -14,8 +14,12 @@ program
             cargo.log('throw', 'The given action does not exist');
         }
 
-        cargo.metal[action](metal, function () {
+        cargo.metal[action](metal, function (output) {
             cargo.log('Finished', action, 'on', metal.join(', '));
+            if (output) {
+                cargo.log('Output:\n');
+                console.log(output);
+            }
         })
     })
     .parse(process.argv);

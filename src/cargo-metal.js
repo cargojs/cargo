@@ -27,9 +27,7 @@ CargoMetal.prototype.status = function (metals, callback) {
         var regex = new RegExp(regex_string, "gm");
         var metal_status = output.match(regex);
 
-        console.log(metal_status.join('\n'));
-
-        callback();
+        callback(metal_status.join('\n'));
     });
 };
 
