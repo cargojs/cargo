@@ -5,7 +5,18 @@ Git flow your development and deployment projects
 Cargo is a collection of commands used to manage an infrastructure using
 a git-flow style workflow.
 
-## Configuration
+## Installation
+
+Cargo can be installed using the following commands
+
+````
+git clone https://github.com/cargojs/cargo.git ~/.cargo && \
+cd ~/.cargo && \
+npm install && \
+cd
+````
+
+## Project Configuration
 
 To use cargo you will need to create a project folder and put a file
 'cargo.config' inside. The config file might look like the following
