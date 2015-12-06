@@ -7,7 +7,7 @@ var cargo = require('..');
 
 program
     .version(packagejson.version)
-    .description('Manage your infrastructure\'s metal, provision based on metal configuration')
+    .description('Manage your infrastructure\'s metal, provision based on metal configuration (no wildcarding)')
     .arguments('<action> [metal...]')
     .action(function (action, metal) {
         if (!_.isFunction(cargo.metal[action])) {

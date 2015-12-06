@@ -12,9 +12,6 @@ var CargoMetal = function () {
 
 CargoMetal.prototype.provision = function (metals, callback) {
     var functions = [];
-    if (metals[0] == '-') {
-        metals = _.keys(this.cargo.config.get('metal'));
-    }
 
     _.each(metals, function (metal_name) {
         if (_.keys(this.cargo.config.get('metal')).indexOf(metal_name) == -1) {

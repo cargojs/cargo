@@ -81,7 +81,7 @@ a git-flow style workflow.
 
   Usage: cargo-metal [options] <action> [metal...]
 
-  Manage your infrastructure's metal, provision based on metal configuration
+  Manage your infrastructure's metal, provision based on metal configuration (no wildcarding)
 
   Options:
 
