@@ -48,14 +48,19 @@ cargo metal provision development
 
 This will create a docker-machine instance called grav.development
 ([name].[metal]). Now you have a machine you can initialise your repositories
-using:
+and development environment using:
 
 ````
 cargo init -
 ````
 
 This will pull all the repositories listed in your configuration and run
-any setup commands given (these are run from the repo directory)
+any setup commands given (these are run from the repo directory). You can then
+build and then start any services on your development metal (if it is running).
+
+````
+cargo service provision development -
+````
 
 ## Commands
 
