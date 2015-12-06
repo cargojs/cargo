@@ -1,0 +1,6 @@
+commands:
+    install:
+        -
+            module: cargo-git
+            action: cloneAll
+            data: config.repositories

@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var packagejson = require(__dirname + '/../package.json');
+var program = require('commander');
+
+var cargo = require('..');
+
+program
+    .version(packagejson.version)
+    .option('--full', 'Show the full config, including the system set up.')
+    .parse(process.argv);
+
+console.log(cargo.config.show(program.full));

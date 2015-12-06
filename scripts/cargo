@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+var packagejson = require(__dirname + '/../package.json');
+var program = require('commander');
+var colors = require('colors');
+var fs = require('fs');
+
+// Dump the cargo logo
+// console.log(colors.blue(fs.readFileSync(__dirname + '/../resources/art/logo-text')) + "\n");
+
+program
+    .version(packagejson.version)
+    .description('Git flow your development and deployment projects')
+    .command('init', 'Initialise the nearest cargo configuration')
+    .command('install', 'Install the current cargo config')
+    .command('update', 'Update the current cargo from config')
+    .command('clone <repo...>', 'Clone and pull any repositories including development and master branches')
+    .command('setup <repo...>', 'Run the setup scripts for each repository')
+    .command('config', 'Show the config information that would be used for any commands')
+    .parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+    program.help();
+}
