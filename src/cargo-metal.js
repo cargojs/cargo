@@ -10,6 +10,29 @@ var CargoMetal = function () {
     }
 };
 
+CargoMetal.prototype.status = function (metals, callback) {
+    var scope = this;
+    if (metals[0] == '-') {
+        metals = _.keys(this.cargo.config.get('metal'));
+    }
+    shell.exec('docker-machine ls', {silent: true}, function (err, output) {
+        var regex_string = '^((NAME';
+
+        _.each(metals, function (metal, metal_name) {
+            regex_string += '|' + scope.cargo.config.get('name') + '.' + metal;
+        });
+
+        regex_string += ')[^\n]+)$';
+
+        var regex = new RegExp(regex_string, "gm");
+        var metal_status = output.match(regex);
+
+        console.log(metal_status.join('\n'));
+
+        callback();
+    });
+};
+
 CargoMetal.prototype.provision = function (metals, callback) {
     var functions = [];
 
