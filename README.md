@@ -132,3 +132,18 @@ any setup commands given (these are run from the repo directory)
     -V, --version  output the version number
 
 ````
+
+### cargo path
+
+````
+
+  Usage: cargo-path [options]
+
+  Show the cargo installation path from this project
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+````

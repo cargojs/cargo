@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var packagejson = require(__dirname + '/../package.json');
+var program = require('commander');
+var fs = require('fs');
+var cargo = require('..');
+
+program
+    .version(packagejson.version)
+    .description('Show the cargo installation path from this project')
+    .parse(process.argv);
+
+console.log(fs.realpathSync(__dirname + '/../'));

@@ -16,6 +16,7 @@ program
     .command('setup <repo...>', 'Run the setup scripts for each repository')
     .command('metal <action> <metal...>', 'Manage your infrastructure\'s metal, provision based on metal configuration')
     .command('config', 'Show the config information that would be used for any commands')
+    .command('path', 'Show the cargo installation path')
     .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
