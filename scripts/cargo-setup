@@ -9,7 +9,7 @@ var shell = require('shelljs');
 
 program
     .version(packagejson.version)
-    .description('Runs setup tasks for all or particular repositories (paralell operation)')
+    .description('Runs setup tasks for all or particular codebases (paralell operation)')
     .arguments('<repo...>', 'The repo that you want to clone')
     .action(function (repos) {
         cargo.setup.run(repos, function () {

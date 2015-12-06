@@ -9,11 +9,11 @@ var shell = require('shelljs');
 
 program
     .version(packagejson.version)
-    .description('Will clone all or particular repositories (paralell operation)')
+    .description('Will clone all or particular codebases (paralell operation)')
     .arguments('<repo...>', 'The repo that you want to clone')
     .action(function (repos) {
         cargo.git.clone(repos, function () {
-            cargo.log('Finished cloning repositories:', repos.join(', '));
+            cargo.log('Finished cloning codebases:', repos.join(', '));
         });
     })
     .parse(process.argv);

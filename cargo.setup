@@ -3,4 +3,4 @@ commands:
         -
             module: cargo-git
             action: cloneAll
-            data: config.repositories
+            data: config.codebases

@@ -13,11 +13,11 @@ var CargoGit = function () {
 CargoGit.prototype.clone = function (repos, callback) {
     var functions = [];
     if (repos[0] == '-') {
-        repos = _.keys(this.cargo.config.get('repositories'));
+        repos = _.keys(this.cargo.config.get('codebases'));
     }
 
     _.each(repos, function (repo_name) {
-        var repo = this.cargo.config.get('repositories')[repo_name];
+        var repo = this.cargo.config.get('codebases')[repo_name];
         var func = function (callback) {
             var scope = this;
             var src = repo.uri;

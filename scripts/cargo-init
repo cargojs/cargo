@@ -11,9 +11,9 @@ program
     .arguments('<repo...>', 'The repo that you want to init')
     .action(function (repos) {
         cargo.git.clone(repos, function () {
-            cargo.log('Finished cloning repositories:', repos.join(', '));
+            cargo.log('Finished cloning codebases:', repos.join(', '));
             cargo.setup.run(repos, function () {
-                cargo.log('Finished setting up repositories:', repos.join(', '));
+                cargo.log('Finished setting up codebases:', repos.join(', '));
             });
         });
     })

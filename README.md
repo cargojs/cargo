@@ -24,7 +24,7 @@ taken from `examples/grav/cargo.config`
 
 ````yaml
 name: grav
-repositories:
+codebases:
     grav:
         uri: 'https://github.com/getgrav/grav.git'
         setup: './bin/grav install'
@@ -47,14 +47,14 @@ cargo metal provision development
 ````
 
 This will create a docker-machine instance called grav.development
-([name].[metal]). Now you have a machine you can initialise your repositories
+([name].[metal]). Now you have a machine you can initialise your codebases
 and development environment using:
 
 ````
 cargo init -
 ````
 
-This will pull all the repositories listed in your configuration and run
+This will pull all the codebases listed in your configuration and run
 any setup commands given (these are run from the repo directory). You can then
 build and then start any services on your development metal (if it is running).
 
@@ -75,7 +75,7 @@ cargo service provision development -
 
 
     init             Initialise the nearest cargo configuration
-    clone <repo...>  Clone and pull any repositories including development and master branches
+    clone <repo...>  Clone and pull any codebases including development and master branches
     setup <repo...>  Run the setup scripts for each repository
     config           Show the config information that would be used for any commands
     help [cmd]       display help for [cmd]
@@ -110,7 +110,7 @@ cargo service provision development -
 
   Usage: cargo-clone [options] <repo...>
 
-  Will clone all or particular repositories (paralell operation)
+  Will clone all or particular codebases (paralell operation)
 
   Options:
 
@@ -125,7 +125,7 @@ cargo service provision development -
 
   Usage: cargo-setup [options] <repo...>
 
-  Runs setup tasks for all or particular repositories (paralell operation)
+  Runs setup tasks for all or particular codebases (paralell operation)
 
   Options:
 
