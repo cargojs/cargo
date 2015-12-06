@@ -12,9 +12,13 @@ var CargoMetal = function () {
 
 CargoMetal.prototype.status = function (metals, callback) {
     var scope = this;
+    metals = [metals];
     if (metals[0] == '-') {
         metals = _.keys(this.cargo.config.get('metal'));
     }
+
+    this.cargo.log('Getting status on', metals.join(','));
+
     shell.exec('docker-machine ls', {silent: true}, function (err, output) {
         var regex_string = '^((NAME';
 
@@ -26,6 +30,8 @@ CargoMetal.prototype.status = function (metals, callback) {
 
         var regex = new RegExp(regex_string, "gm");
         var metal_status = output.match(regex);
+
+        scope.cargo.log('Finished getting status on', metals.join(', '));
 
         callback(metal_status.join('\n'));
     });
