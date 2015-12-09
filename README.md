@@ -1,165 +1,63 @@
 # Cargo
 
-Git flow your development and deployment projects
+_Approach everything with a flow_
 
-Cargo is a collection of commands used to manage an infrastructure using
-a git-flow style workflow.
+Cargo is an approach to development and deployment that follows the git flow
+approach to branching and version management.
 
-## Installation
+## Key Concepts
 
-Cargo can be installed using the following commands
+Cargo relies heavily on git, git flow, docker, docker-compose, and
+docker-machine. Thanks to these great projects we can apply the ideas behind
+Vincent Driessen's [branching model](http://nvie.com/git-model)
 
-````
-git clone https://github.com/cargojs/cargo.git ~/.cargo && \
-cd ~/.cargo && \
-npm install && \
-cd
-````
+#### Metal
 
-## Project Configuration
+Metal is the equivilent of docker-machine but abstracted to allow easier
+management of deployments from your development environment.
 
-To use cargo you will need to create a project folder and put a file
-'cargo.config' inside. The config file might look like the following
-taken from `examples/grav/cargo.config`
+#### Service
 
-````yaml
+A service is a containerized daemon or tool that is deployed to your metal.
+Services could be web servers, applications like php cli, or mysql.
+
+#### Codebase
+
+A codebase is a git repository of files to be mapped or copied to your services
+they are usually mapped when used on a development or staging metal and copied
+when building a production service.
+
+## Configuring Cargo
+
+A cargo project is configured using a yaml file in the root of your cargo
+project. This file should describe everything that is needed to set up your
+project, including your servers, services, and codebases.
+
+__cargo.yml__ file
+
+```yaml
 name: grav
+defaults:
+  metal: development
 codebases:
     grav:
         uri: 'https://github.com/getgrav/grav.git'
         setup: './bin/grav install'
 services:
     www:
-        image: 'docker/php:apache'
-        maps:
-            - 'grav:/var/www/html'
+      image: 'docker/php:apache'
+      volumes:
+        - 'grav:/var/www/html'
 metal:
-    development:
-        driver: virtualbox
-
-````
-
-You will need to set up a machine to run your service containers (currently
-boot2docker machine on virtualbox is supported) to do this run the following:
-
-````
-cargo metal provision development
-````
-
-This will create a docker-machine instance called grav.development
-([name].[metal]). Now you have a machine you can initialise your codebases
-and development environment using:
-
-````
-cargo init -
-````
-
-This will pull all the codebases listed in your configuration and run
-any setup commands given (these are run from the repo directory). You can then
-build and then start any services on your development metal (if it is running).
-
-````
-cargo service provision development -
-````
-
-## Commands
-
-### cargo
-
-````
-
-  Usage: cargo [options] [command]
-
-
-  Commands:
-
-
-    init             Initialise the nearest cargo configuration
-    clone <repo...>  Clone and pull any codebases including development and master branches
-    setup <repo...>  Run the setup scripts for each repository
-    config           Show the config information that would be used for any commands
-    help [cmd]       display help for [cmd]
-
-  Git flow your development and deployment projects
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-````
-
-### cargo init
-
-````
-
-  Usage: cargo-init [options] <repo...>
-
-  Initialise the nearest cargo configuration
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-````
-
-### cargo clone
-
-````
-
-  Usage: cargo-clone [options] <repo...>
-
-  Will clone all or particular codebases (paralell operation)
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-````
-
-### cargo setup
-
-````
-
-  Usage: cargo-setup [options] <repo...>
-
-  Runs setup tasks for all or particular codebases (paralell operation)
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-````
-
-### cargo metal
-
-````
-
-  Usage: cargo-metal [options] <action> [metal...]
-
-  Manage your infrastructure's metal, provision based on metal configuration (no wildcarding)
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-````
-
-### cargo path
-
-````
-
-  Usage: cargo-path [options]
-
-  Show the cargo installation path from this project
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-````
+  development:
+    driver: virtualbox
+  staging:
+    driver: generic
+    ip-address: 10.0.100.15
+    ssh-key: ~/.ssh/id_rsa
+    ssh-user: deployer
+    ssh-port: 22
+  production:
+    driver: digitalocean
+    access-token: aa9399a2175a93b17b1c86c808d3fc4b79876545432a629602f61cf6ccd6b
+```

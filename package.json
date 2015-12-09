@@ -34,6 +34,6 @@
     "yamljs": "^0.2.4"
   },
   "bin": {
-    "cargo": "scripts/cargo"
+    "cargo": "cargo.js"
   }
 }
