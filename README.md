@@ -40,14 +40,14 @@ name: grav
 defaults:
   metal: development
 codebases:
-    grav:
-        uri: 'https://github.com/getgrav/grav.git'
-        setup: './bin/grav install'
+  grav:
+    uri: 'https://github.com/getgrav/grav.git'
+    setup: ./bin/grav install
 services:
-    www:
-      image: 'docker/php:apache'
-      volumes:
-        - 'grav:/var/www/html'
+  www:
+    image: 'docker/php:apache'
+    volumes:
+      - 'grav:/var/www/html'
 metal:
   development:
     driver: virtualbox
