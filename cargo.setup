@@ -6,3 +6,5 @@ commands:
             module: cargo-git
             action: cloneAll
             data: config.codebases
+cli:
+    loglevel: error # log, error, throw, none

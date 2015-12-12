@@ -1,0 +1,22 @@
+# Cargo Command Reference
+
+Cargo mirrors the actions of the following applications and for the most part
+seeks to maintain the meanings of each of these actions
+
+## Folder structure
+
+Your cargo project only needs one file to get started ``cargo.config`` this
+stores all the set up information needed by cargo to get up and running.
+
+````
+./cargo-project
+    ├── cargo.config                # Main configuration file
+    ├── codebases                   # Storage space for codebases (created)
+    |   └── grav
+    ├── images                      # Custom docker image files
+    │   └── grav-php
+    │       └── Dockerfile
+    └── composer-configs            # Generated docker-compose files (created)
+        └── grav.development.yml
+````
+
