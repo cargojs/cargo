@@ -58,6 +58,5 @@ metal:
     ssh-user: deployer
     ssh-port: 22
   production:
-    driver: digitalocean
-    access-token: aa9399a2175a93b17b1c86c808d3fc4b79876545432a629602f61cf6ccd6b
+    driver: auth.digitalocean
 ```
